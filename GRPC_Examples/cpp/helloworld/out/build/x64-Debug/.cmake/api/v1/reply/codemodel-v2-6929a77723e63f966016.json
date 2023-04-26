@@ -1,0 +1,123 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "HelloWorld",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_async_client::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_async_client-Debug-629f2a883e24bfe499b9.json",
+					"name" : "greeter_async_client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_async_client2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_async_client2-Debug-32ee147a1ccbd2e75a56.json",
+					"name" : "greeter_async_client2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_async_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_async_server-Debug-fc093ba0b4cae0d23aa6.json",
+					"name" : "greeter_async_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_callback_client::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_callback_client-Debug-34504081e8107654ec5c.json",
+					"name" : "greeter_callback_client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_callback_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_callback_server-Debug-8d836f9269afad1468e1.json",
+					"name" : "greeter_callback_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_client::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_client-Debug-4f06c798aaa6f3493c74.json",
+					"name" : "greeter_client",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "greeter_server::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-greeter_server-Debug-1448c544832773baa820.json",
+					"name" : "greeter_server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "hw_grpc_proto::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hw_grpc_proto-Debug-b1f069635df711e0ff75.json",
+					"name" : "hw_grpc_proto",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/projects/PrototypingAndSamples/GRPC_Examples/cpp/helloworld/out/build/x64-Debug",
+		"source" : "D:/projects/PrototypingAndSamples/GRPC_Examples/cpp/helloworld"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

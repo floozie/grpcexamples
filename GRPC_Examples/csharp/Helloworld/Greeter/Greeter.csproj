@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Protobuf Include="../../../protos/helloworld2stubs.proto" Link="helloworld2stubs.proto" />
+	<Protobuf Include="../../../protos/helloworld.proto" Link="helloworld.proto" />
   </ItemGroup>
 
 </Project>

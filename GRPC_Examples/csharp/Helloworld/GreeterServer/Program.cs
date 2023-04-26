@@ -16,23 +16,59 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Helloworld2Stubs;
+
 
 namespace GreeterServer
 {
-    class GreeterImpl : Greeter2Stubs.Greeter2StubsBase
+    class GreeterImpl : Helloworld.Greeter.GreeterBase
     {
         private static Random rnd = new Random();
         private int requestId = 0;
         // Server side handler of the SayHello RPC
-        public override async Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+        public override async Task<Helloworld.HelloReply> SayHello(Helloworld.HelloRequest request, ServerCallContext context)
+        {
+            int secondsDelay = rnd.Next(1, 30);
+            Console.WriteLine(request.Name + " requested SayHello");
+            //Console.WriteLine($"Request has Order: {request.HasOrder}");
+            //Console.WriteLine("This is how the order object looks like:" +request.Order);
+            Console.WriteLine("I am now pretending to do some " + secondsDelay + " second long calculation, so that cancellation can be performed");
+            var taskCompletionSource = new TaskCompletionSource<Helloworld.HelloReply>();
+            //taskCompletionSource.SetResult(new HelloReply { Message = "Hello " + request.Name });
+            int time = 0;
+            try
+            {
+                for (int i = 0; i < secondsDelay; i++)
+                {
+                    context.CancellationToken.ThrowIfCancellationRequested();
+                    await Task.Delay(1000);
+                    time = (i + 1) * 1000;
+                }
+                taskCompletionSource.SetResult(new Helloworld.HelloReply { Message = $"Hello {request.Name} server used {time} ms to calculate the response" });
+            }
+            catch (OperationCanceledException)
+            {
+                var message = $"Task have been cancelled trough rpc after {time} ms";
+                Console.WriteLine(message);
+                taskCompletionSource.SetCanceled();
+                //taskCompletionSource.SetResult(new HelloReply { Message = message });
+            }
+            return await taskCompletionSource.Task;
+        }
+    }
+
+    class Greeter2StubsImpl : Helloworld2Stubs.Greeter2Stubs.Greeter2StubsBase
+    {
+        private static Random rnd = new Random();
+        private int requestId = 0;
+        // Server side handler of the SayHello RPC
+        public override async Task<Helloworld2Stubs.HelloReply> SayHello(Helloworld2Stubs.HelloRequest request, ServerCallContext context)
         {
             int secondsDelay = rnd.Next(1, 30);
             Console.WriteLine(request.Name + " requested SayHello");
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);
             Console.WriteLine("I am now pretending to do some "+ secondsDelay + " second long calculation, so that cancellation can be performed");
-            var taskCompletionSource = new TaskCompletionSource<HelloReply>();
+            var taskCompletionSource = new TaskCompletionSource<Helloworld2Stubs.HelloReply>();
             //taskCompletionSource.SetResult(new HelloReply { Message = "Hello " + request.Name });
             int time = 0;
             try
@@ -43,7 +79,7 @@ namespace GreeterServer
                     await Task.Delay(1000);
                     time = (i+1) * 1000;
                 }
-                taskCompletionSource.SetResult(new HelloReply { Message = $"Hello {request.Name} server used {time} ms to calculate the response" });
+                taskCompletionSource.SetResult(new Helloworld2Stubs.HelloReply { Message = $"Hello {request.Name} server used {time} ms to calculate the response" });
             }
             catch (OperationCanceledException)
             {
@@ -55,7 +91,7 @@ namespace GreeterServer
             return await taskCompletionSource.Task;
         }
 
-        public override async Task<GoodbyeReply> SayGoodbye(GoodbyeRequest request, ServerCallContext context)
+        public override async Task<Helloworld2Stubs.GoodbyeReply> SayGoodbye(Helloworld2Stubs.GoodbyeRequest request, ServerCallContext context)
         {
 
             int secondsDelay = rnd.Next(1, 30);
@@ -63,7 +99,7 @@ namespace GreeterServer
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);
             Console.WriteLine("I am now pretending to do some " + secondsDelay + " second long calculation, so that cancellation can be performed");
-            var taskCompletionSource = new TaskCompletionSource<GoodbyeReply>();
+            var taskCompletionSource = new TaskCompletionSource<Helloworld2Stubs.GoodbyeReply>();
             //taskCompletionSource.SetResult(new HelloReply { Message = "Hello " + request.Name });
             int time = 0;
             try
@@ -74,7 +110,7 @@ namespace GreeterServer
                     await Task.Delay(1000);
                     time = (i + 1) * 1000;
                 }
-                taskCompletionSource.SetResult(new GoodbyeReply { Message = $"Hello {request.Name} server used {time} ms to calculate the response" , Id= requestId++});
+                taskCompletionSource.SetResult(new Helloworld2Stubs.GoodbyeReply { Message = $"Hello {request.Name} server used {time} ms to calculate the response" , Id= requestId++});
             }
             catch (OperationCanceledException)
             {
@@ -95,7 +131,7 @@ namespace GreeterServer
         {
             Server server = new Server
             {
-                Services = { Greeter2Stubs.BindService(new GreeterImpl()) },
+                Services = { Helloworld2Stubs.Greeter2Stubs.BindService(new Greeter2StubsImpl()), Helloworld.Greeter.BindService(new GreeterImpl()) },
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();

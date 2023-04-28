@@ -27,7 +27,7 @@ namespace GreeterServer
         // Server side handler of the SayHello RPC
         public override async Task<Helloworld.HelloReply> SayHello(Helloworld.HelloRequest request, ServerCallContext context)
         {
-            int secondsDelay = rnd.Next(1, 30);
+            int secondsDelay = rnd.Next(1, 1);
             Console.WriteLine(request.Name + " requested SayHello");
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);
@@ -64,7 +64,7 @@ namespace GreeterServer
         public override async Task<Helloworld2Stubs.HelloReply> SayHello(Helloworld2Stubs.HelloRequest request, ServerCallContext context)
         {
 
-            int secondsDelay = rnd.Next(1, 30);
+            int secondsDelay = rnd.Next(1, 10);
             Console.WriteLine(request.Name + " requested SayHello");
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);
@@ -95,7 +95,7 @@ namespace GreeterServer
         public override async Task<Helloworld2Stubs.GoodbyeReply> SayGoodbye(Helloworld2Stubs.GoodbyeRequest request, ServerCallContext context)
         {
 
-            int secondsDelay = rnd.Next(1, 30);
+            int secondsDelay = rnd.Next(1, 10);
             Console.WriteLine(request.Name + " requested SayGoodbye with id:"+request.Id);
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);

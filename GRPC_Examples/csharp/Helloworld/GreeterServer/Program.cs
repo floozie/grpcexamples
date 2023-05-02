@@ -64,7 +64,7 @@ namespace GreeterServer
         public override async Task<Helloworld2Stubs.HelloReply> SayHello(Helloworld2Stubs.HelloRequest request, ServerCallContext context)
         {
 
-            int secondsDelay = rnd.Next(1, 10);
+            int secondsDelay = rnd.Next(3, 10);
             Console.WriteLine(request.Name + " requested SayHello");
             //Console.WriteLine($"Request has Order: {request.HasOrder}");
             //Console.WriteLine("This is how the order object looks like:" +request.Order);

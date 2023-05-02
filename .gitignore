@@ -164,3 +164,6 @@ _NCrunch*
 *.exe
 *.out
 *.app
+
+.vs/
+Browse.VC.db

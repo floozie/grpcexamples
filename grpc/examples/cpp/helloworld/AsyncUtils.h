@@ -1,6 +1,3 @@
-// Copyright (c) 2022 TRUMPF Laser GmbH
-// All Rights Reserved, see LICENSE.TXT for further details.
-
 #pragma once
 
 #include <condition_variable>
